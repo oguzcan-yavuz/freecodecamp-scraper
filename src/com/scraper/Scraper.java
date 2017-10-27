@@ -14,6 +14,7 @@ class Scraper {
         getLinks(username, path);
     }
 
+    // TODO: make this code more functional
     private void getLinks(String username, String path) throws IOException {
         Writer writer = new Writer(path);   // Create an instance of Writer class
         Document doc = Jsoup.connect("https://www.freecodecamp.org/" + username).get();     // Get the base profile page

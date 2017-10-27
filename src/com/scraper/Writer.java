@@ -1,6 +1,8 @@
 package com.scraper;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 
 class Writer {
@@ -17,11 +19,15 @@ class Writer {
     }
 
     void createFiles(String fileName, String instructions, String solution) throws IOException {
-        // TODO: write the instructions in comment at the top of the created file and write the solution after that
         this.path = this.path.replace("~", System.getProperty("user.home"));    // replace the "~" symbol with home path
-        String fullPath = this.path + File.separator + convertFileName(fileName);   // concatenate path with file name
-        File file = new File(fullPath);     // create new file
-        if(file.createNewFile())    // check if the new file is created
-            System.out.println("File created: " + fileName);    // print out created file's name
+        String convertedFileName = convertFileName(fileName);
+        String fullPath = this.path + File.separator + convertedFileName;   // concatenate path with file name
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(fullPath))) {
+            bw.write("/*\n" + instructions + "*/\n\n" + solution + "\n"); // write instructions at the top in comment blocks, then solution
+            System.out.println(String.format("File is successfully created: %s", convertedFileName));
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println(String.format("Error occurred while trying to create: %s", convertedFileName));
+        }
     }
 }
