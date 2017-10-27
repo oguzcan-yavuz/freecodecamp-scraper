@@ -58,7 +58,6 @@ class Scraper {
         }
     }
 
-    // TODO: make this code more functional
     private void getLinks(String username) throws IOException {
         Document doc = Jsoup.connect("https://www.freecodecamp.org/" + username).get();     // Get the base profile page
         Element algorithmTable = doc.select("table").get(1);    // Get the algorithm table
