@@ -39,10 +39,9 @@ public class Main {
             }
         }
         // if username or output is not given, call the printHelp function.
-        if(arguments[0] == null && arguments[1] == null)
+        if(arguments[0] == null || arguments[1] == null)
             printHelp();
-        // return arguments with username as 0. element and output dir as 1. element
-        return arguments;
+        return arguments;   // return arguments with username as 0. element and output dir as 1. element
     }
 
     public static void main(String[] args) {
