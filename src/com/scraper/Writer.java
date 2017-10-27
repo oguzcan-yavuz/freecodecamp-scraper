@@ -2,8 +2,6 @@ package com.scraper;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
 class Writer {
 
@@ -19,9 +17,9 @@ class Writer {
 
     // TODO: Create a class for creating files in the given output directory
     void createFiles(String fileName) throws IOException {
+        // replace the "~" symbol with home path
+        this.path = this.path.replace("~", System.getProperty("user.home"));
         // concatenate path with file name
-        // TODO: fix the ~ problem for getting home path, try System.getProperty("user.home");
-//        Path fullPath = Paths.get(this.path + File.separator + convertFileName(fileName));
         String fullPath = this.path + File.separator + convertFileName(fileName);
         // create new file
         File file = new File(fullPath);

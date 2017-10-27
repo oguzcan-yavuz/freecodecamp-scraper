@@ -25,6 +25,7 @@ class Scraper {
         // Get the tables
         Elements table = doc.select("table");
 
+        // TODO: get rid of unnecessary loops
         for(Element t: table) {
             for(Element algorithms: t.getElementsContainingText("Algorithms")) {
                 for(Element algorithm: algorithms.select("td")) {
