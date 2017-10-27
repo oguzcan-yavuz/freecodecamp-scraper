@@ -44,14 +44,8 @@ public class Main {
         return arguments;   // return arguments with username as 0. element and output dir as 1. element
     }
 
-    public static void main(String[] args) {
-
+    public static void main(String[] args) throws IOException {
         String[] arguments = argsHandler(args);
         Scraper scraper = new Scraper(arguments[0], arguments[1]);
-        try {
-            scraper.getLinks();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 }
