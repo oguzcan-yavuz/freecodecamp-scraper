@@ -48,9 +48,9 @@ public class Main {
     public static void main(String[] args) {
 
         String[] arguments = argsHandler(args);
-        Scraper scraper = new Scraper();
+        Scraper scraper = new Scraper(arguments[0], arguments[1]);
         try {
-            scraper.getLinks(arguments[0]);
+            scraper.getLinks();
         } catch (IOException e) {
             e.printStackTrace();
         }
