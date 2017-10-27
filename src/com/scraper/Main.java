@@ -18,13 +18,8 @@ public class Main {
         System.exit(0);
     }
 
-    private static String[] argsHandler(String[] args) {
-        // arguments[0] = username, arguments[1] = output directory
+    private static String[] findArgs(String[] args) {
         String[] arguments = new String[2];
-        // print help if any argument is not given
-        if(args.length == 0) {
-            printHelp();
-        }
         // iterate through args, find the username and output directory
         for(int i = 0; i < args.length; i++) {
             switch (args[i]) {
@@ -38,6 +33,16 @@ public class Main {
                     break;
             }
         }
+        return arguments;
+    }
+
+    private static String[] argsHandler(String[] args) {
+        // print help if any argument is not given
+        if(args.length == 0) {
+            printHelp();
+        }
+        // arguments[0] = username, arguments[1] = output directory
+        String[] arguments = findArgs(args);
         // if username or output is not given, call the printHelp function.
         if(arguments[0] == null || arguments[1] == null)
             printHelp();
@@ -45,7 +50,8 @@ public class Main {
     }
 
     public static void main(String[] args) throws IOException {
-        String[] arguments = argsHandler(args);
-        Scraper scraper = new Scraper(arguments[0], arguments[1]);
+        String[] arguments = argsHandler(args);     // handle the args
+        Scraper scraper = new Scraper(arguments[0], arguments[1]);  // start the program by creating an instance of Scraper
+        System.out.println("Done!");
     }
 }

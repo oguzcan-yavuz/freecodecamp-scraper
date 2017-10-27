@@ -14,11 +14,11 @@ class Writer {
     }
 
     // convert example: Reverse a String => reverse_a_string.js
-    private String convertFileName(String fileName) {
+    private String formatFileName(String fileName) {
         return fileName.toLowerCase().replace(" ", "_") + ".js";
     }
 
-    private String convertPath(String fileName) {
+    private String pathHandler(String fileName) {
         this.path = this.path.replace("~", System.getProperty("user.home"));    // replace the "~" symbol with home path
         return this.path + File.separator + fileName;   // concatenate path with file name
     }
@@ -31,12 +31,11 @@ class Writer {
             e.printStackTrace();
             System.out.println(String.format("Error occurred while trying to create: %s", fileName));
         }
-
     }
 
     void createFiles(String fileName, String instructions, String solution) {
-        String convertedFileName = convertFileName(fileName);
-        String fullPath = convertPath(convertedFileName);
-        makeFiles(convertedFileName, instructions, solution, fullPath);
+        String formattedFileName = formatFileName(fileName);   // format the file name
+        String fullPath = pathHandler(formattedFileName);   // get the full path of the file
+        makeFiles(formattedFileName, instructions, solution, fullPath);     // make files
     }
 }
