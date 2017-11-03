@@ -32,12 +32,14 @@ class Scraper {
     }
 
     private String getInstructions(Document solutionPage) {
+        if(solutionPage == null) {  // check if the document is null
+            return "";      // give an empty string as instruction if the solutionPage is null
+        }
         Elements instructions = solutionPage.select("div.challenge-instructions p");  // Extract problem instruction from solution page
         StringBuilder stringBuilder = new StringBuilder();
         // iterate through all elements of the instructions and append them to the string builder except last repeating instruction
-        for(int i = 0; i < instructions.size() - 1; i++) {
+        for(int i = 0; i < instructions.size() - 1; i++)
             stringBuilder.append(instructions.get(i).text()).append("\n");
-        }
         return stringBuilder.toString();
     }
 
@@ -49,10 +51,6 @@ class Scraper {
             String fileName = solution.substring(solution.indexOf("challenges/") + "challanges/".length(), solution.indexOf("?"));   // Extract file name from url
             solution = solution.substring(solution.indexOf("\n"));    // after the first new line, rest of the link is the solution
             Document solutionPage = getInstructionDocument(absoluteLink);
-            if(solutionPage == null) {  // check if the document is null
-                callWriter(fileName, "", solution); // give empty instruction to the writer if we got HttpStatusException and continue
-                continue;
-            }
             String instructionString = getInstructions(solutionPage);  // get the instructions as a string
             callWriter(fileName, instructionString, solution);
         }
