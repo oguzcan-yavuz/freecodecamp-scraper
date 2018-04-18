@@ -9,3 +9,5 @@ top of the file, after that saves the user's solution.
 - Example usage:
 
         java -jar fcc-scraper.jar -u yavuzovksi -o ~/playground/javascript
+
+- Program is not working anymore due to changes on freecodecamp.org
